@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import okhttp3.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -53,6 +54,11 @@ class TakePictureActivity : AppCompatActivity() {
         imageview = findViewById<View>(R.id.iv) as ImageView
 
         btn!!.setOnClickListener { showPictureDialog() }
+
+        val createBtn: View = findViewById(R.id.createBtn)
+        createBtn.setOnClickListener { view ->
+            createUser()
+        }
 
     }
 
@@ -295,5 +301,30 @@ class TakePictureActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    fun createUser() {
+        val url = "http://10.191.10.76:3000/users"
+        //val url = "http://3dfff4bf.ngrok.io/users"
 
+        // Use this url for local emulator
+        //val url = "http://10.0.2.2:3000/users";
+        val builder = FormBody.Builder()
+        builder.add("name", "TestApp")
+
+        val formBody = builder.build()
+
+        val request = Request.Builder().url(url).post(formBody).build()
+        var client = OkHttpClient()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                println(e.localizedMessage);
+                println("Failed to execute request")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body?.string()
+                println(body.toString())
+            }
+        })
+
+    }
 }
