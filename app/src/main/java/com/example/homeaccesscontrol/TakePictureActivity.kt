@@ -17,6 +17,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -310,10 +311,12 @@ class TakePictureActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun createUser() {
         val url = "http://10.191.10.76:3000/users"
-        //val url = "http://3dfff4bf.ngrok.io/users"
 
         // Use this url for local emulator
         //val url = "http://10.0.2.2:3000/users";
+
+        val nameEdit: EditText = findViewById(R.id.nameInput)
+        val nameInput = nameEdit.getText().toString()
         val builder = FormBody.Builder()
 
         val bitmap = (imageview?.getDrawable() as BitmapDrawable).getBitmap()
@@ -322,7 +325,7 @@ class TakePictureActivity : AppCompatActivity() {
         val image = stream.toByteArray()
         var base64 = Base64.getEncoder().encodeToString(image)
         base64 = "data:image/jpeg;base64," + base64
-        builder.add("name", "TestApp2")
+        builder.add("name", nameInput)
         builder.add("image", base64)
 
         val formBody = builder.build()
