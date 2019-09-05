@@ -272,7 +272,7 @@ class TakePictureActivity : AppCompatActivity() {
                                     }
                                 })
                         } else {
-                            explain("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+                            //explain("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
                             //                            //proceed with logic by disabling the related features or quit the app.
                         }//permission is denied (and never ask again is  checked)
                         //shouldShowRequestPermissionRationale will return false
@@ -341,6 +341,8 @@ class TakePictureActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
                 println(body.toString())
+                val i = Intent(this@TakePictureActivity, MainActivity::class.java)
+                startActivity(i)
             }
         })
 
