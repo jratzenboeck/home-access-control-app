@@ -30,6 +30,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
+@Suppress("DEPRECATION")
 class TakePictureActivity : AppCompatActivity() {
     private val TAG = "tag"
     private var btn: Button? = null
@@ -59,10 +60,15 @@ class TakePictureActivity : AppCompatActivity() {
         btn!!.setOnClickListener { showPictureDialog() }
 
         val createBtn: View = findViewById(R.id.createBtn)
+<<<<<<< Updated upstream
         createBtn.setOnClickListener { view ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createUser()
             }
+=======
+        createBtn.setOnClickListener {
+            createUser()
+>>>>>>> Stashed changes
         }
 
     }
@@ -73,7 +79,7 @@ class TakePictureActivity : AppCompatActivity() {
         val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
         pictureDialog.setItems(
             pictureDialogItems
-        ) { dialog, which ->
+        ) { _, which ->
             when (which) {
                 0 -> choosePhotoFromGallary()
                 1 -> takePhotoFromCamera()
@@ -105,10 +111,10 @@ class TakePictureActivity : AppCompatActivity() {
         }*/
         if (requestCode == GALLERY) {
             if (data != null) {
-                val contentURI = data!!.data
+                val contentURI = data.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
-                    val path = saveImage(bitmap)
+                    //val path = saveImage(bitmap)
                     Toast.makeText(this@TakePictureActivity, "Image Saved!", Toast.LENGTH_SHORT)
                         .show()
                     imageview!!.setImageBitmap(bitmap)
@@ -261,7 +267,7 @@ class TakePictureActivity : AppCompatActivity() {
                             )
                         ) {
                             showDialogOK("Service Permissions are required for this app",
-                                DialogInterface.OnClickListener { dialog, which ->
+                                DialogInterface.OnClickListener { _, which ->
                                     when (which) {
                                         DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
                                         DialogInterface.BUTTON_NEGATIVE ->
@@ -293,7 +299,7 @@ class TakePictureActivity : AppCompatActivity() {
     private fun explain(msg: String) {
         val dialog = AlertDialog.Builder(this)
         dialog.setMessage(msg)
-            .setPositiveButton("Yes") { paramDialogInterface, paramInt ->
+            .setPositiveButton("Yes") { _, _ ->
                 //  permissionsclass.requestPermission(type,code);
                 startActivity(
                     Intent(
@@ -302,7 +308,7 @@ class TakePictureActivity : AppCompatActivity() {
                     )
                 )
             }
-            .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> finish() }
+            .setNegativeButton("Cancel") { _, _ -> finish() }
         dialog.show()
     }
 
