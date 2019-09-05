@@ -321,7 +321,6 @@ class TakePictureActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
         val image = stream.toByteArray()
         var base64 = Base64.getEncoder().encodeToString(image)
-        println(base64)
         base64 = "data:image/jpeg;base64," + base64
         builder.add("name", "TestApp2")
         builder.add("image", base64)
