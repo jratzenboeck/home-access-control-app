@@ -6,8 +6,10 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
@@ -17,6 +19,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -57,7 +60,9 @@ class TakePictureActivity : AppCompatActivity() {
 
         val createBtn: View = findViewById(R.id.createBtn)
         createBtn.setOnClickListener { view ->
-            createUser()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                createUser()
+            }
         }
 
     }
@@ -301,6 +306,7 @@ class TakePictureActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun createUser() {
         val url = "http://10.191.10.76:3000/users"
         //val url = "http://3dfff4bf.ngrok.io/users"
@@ -308,7 +314,16 @@ class TakePictureActivity : AppCompatActivity() {
         // Use this url for local emulator
         //val url = "http://10.0.2.2:3000/users";
         val builder = FormBody.Builder()
-        builder.add("name", "TestApp")
+
+        val bitmap = (imageview?.getDrawable() as BitmapDrawable).getBitmap()
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        val image = stream.toByteArray()
+        var base64 = Base64.getEncoder().encodeToString(image)
+        println(base64)
+        base64 = "data:image/jpeg;base64," + base64
+        builder.add("name", "TestApp2")
+        builder.add("image", base64)
 
         val formBody = builder.build()
 
