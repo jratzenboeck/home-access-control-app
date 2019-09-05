@@ -60,15 +60,10 @@ class TakePictureActivity : AppCompatActivity() {
         btn!!.setOnClickListener { showPictureDialog() }
 
         val createBtn: View = findViewById(R.id.createBtn)
-<<<<<<< Updated upstream
         createBtn.setOnClickListener { view ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createUser()
             }
-=======
-        createBtn.setOnClickListener {
-            createUser()
->>>>>>> Stashed changes
         }
 
     }
