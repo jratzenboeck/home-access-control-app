@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addPerson(view: View) {
+    private fun addPerson(view: View) {
         val intent = Intent(this, TakePictureActivity::class.java)
         startActivity(intent)
     }
@@ -46,6 +45,5 @@ class MainActivity : AppCompatActivity() {
         txtv.setTextColor(Color.parseColor("#000000"))
         txtv.gravity = Gravity.CENTER_HORIZONTAL
     }
-
 
 }

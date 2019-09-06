@@ -1,7 +1,23 @@
 <resources>
-    <string name="app_name">HomeAccessControl</string>
+    <string name="app_name">Home Access Control</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="text_main">List of people</string>
+    <string name="text_main">Welcome to Home Access Control</string>
+    <string name="select_image">Select or Capture Image</string>
+    <string name="name">Name</string>
+    <string name="create_user">Create User</string>
+    <string name="title_main">© 2019 Bad Hombres GmbH</string>
+    <string-array name="city_list">
+        <item>Bangkok</item>
+        <item>London</item>
+        <item>Paris</item>
+        <item>Singapore</item>
+        <item>New York</item>
+        <item>Istanbul</item>
+        <item>Dubai</item>
+        <item>Kuala Lumpur</item>
+        <item>Hong Kong</item>
+        <item>Barcelona</item>
+    </string-array>
 </resources>
