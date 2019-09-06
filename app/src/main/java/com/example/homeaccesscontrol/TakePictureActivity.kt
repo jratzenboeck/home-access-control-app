@@ -336,12 +336,16 @@ class TakePictureActivity : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 println(e.localizedMessage);
                 println("Failed to execute request")
+                val i = Intent(this@TakePictureActivity, MainActivity::class.java)
+                i.putExtra("response", "failureCreateUser")
+                startActivity(i)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
                 println(body.toString())
                 val i = Intent(this@TakePictureActivity, MainActivity::class.java)
+                i.putExtra("response", "successCreateUser")
                 startActivity(i)
             }
         })
