@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         val response = intent.getStringExtra("response")
 
         if (response == "successCreateUser") {
-            setSnackBar(fab, "User was created successfully");
+            setSnackBar(fab, "User was created successfully", true);
         } else if (response == "failureCreateUser") {
-            setSnackBar(fab, "User could not be created");
+            setSnackBar(fab, "User could not be created", false);
         }
     }
 
@@ -33,11 +33,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun setSnackBar(root: View, snackTitle: String) {
+    fun setSnackBar(root: View, snackTitle: String, success: Boolean) {
         val snackbar = Snackbar.make(root, snackTitle, Snackbar.LENGTH_SHORT)
         snackbar.show()
         val view = snackbar.view
-        snackbar.view.setBackgroundColor(Color.parseColor("#2bff00"))
+        if (success) {
+            snackbar.view.setBackgroundColor(Color.parseColor("#2bff00"))
+        } else {
+            snackbar.view.setBackgroundColor(Color.parseColor("#f55742"))
+        }
         val txtv = view.findViewById(R.id.snackbar_text) as TextView
         txtv.setTextColor(Color.parseColor("#000000"))
         txtv.gravity = Gravity.CENTER_HORIZONTAL

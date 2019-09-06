@@ -343,9 +343,13 @@ class TakePictureActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-                println(body.toString())
+
                 val i = Intent(this@TakePictureActivity, MainActivity::class.java)
-                i.putExtra("response", "successCreateUser")
+                if (response.code == 200) {
+                    i.putExtra("response", "successCreateUser")
+                } else {
+                    i.putExtra("response", "failureCreateUser")
+                }
                 startActivity(i)
             }
         })
